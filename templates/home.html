@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <div class="container">
+        <h1>E commerce Application</h1>
+        <p class="tagline">Let's shop together!</p>
+        <button class="btn" onclick="window.location.href='/todo'">Let's Go</button>
+    </div>
+    <div class="container">
+        <button class="btn" onclick="window.location.href='/login'">Login</button>
+        <button class="btn" onclick="window.location.href='/signup'">Signup</button>
+        <button class="btn" onclick="window.location.href='/oauthlogin'">Login with Gmail</button>
+    </div>
+</body>
+</html>

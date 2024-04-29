@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="flash-messages">
+            <strong>{{ category }}</strong>: {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+<div class="first" >
+        <h1>Todo List!</h1>
+        <form  action="/add" method="post">
+            <div >
+                <label class="thick">Enter the task</label>
+                <input type="text" name="task_description">
+            </div>
+            <br>
+            <div>
+                <label class="thick">Enter the day</label>
+                <input type="text" name="day">
+            </div>
+               <div>
+            <button class="button1" type="submit" >Add</button>
+            </div>
+        </form>
+        <br><br>
+     <table>
+         <tbody>
+        {% for todo in todo_list %}
+        <tr>
+            <td class="thick2">
+                <form action="/update/{{ todo.task_id }}" method="post">
+                    <textarea name="task_description" cols="50">{{todo.task_description}}</textarea>
+            </td>
+            <td class="thick3">
+                <input type="text" name="day" value="{{ todo.day }}">
+            </td>
+            <td>
+                <input type="checkbox" name="done" {% if todo.done %} checked {% endif %}>
+                <label>{{ "Done" if todo.done else "Not done" }}</label>
+            </td>
+            <td>
+                <button type="submit" class="button2">Update</button>
+            </td>
+            </form>
+            
+            <td>
+                <a href="/delete/{{ todo.task_id }}" class="button3">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+<div class="container">
+    <button class="btn" onclick="window.location.href='/logout'">Logout</button>
+</div>
+</body>
+</html>
