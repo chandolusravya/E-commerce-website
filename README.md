@@ -28,8 +28,7 @@ Setting up development Environment;
 
 Note: To open mysql:
 ##
-mysql -u root -p
-##
+      mysql -u root -p
 ##
 
 
