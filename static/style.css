@@ -7,13 +7,85 @@ body{
     width: 100%;
     height: 100vh;
     padding: 10px;
-    background: linear-gradient(to bottom, #f6f3fc 0%, #497BE8 100%);
+    background: linear-gradient(to bottom, #f6f3fc 50%, #b8dcf7 100%);
     }
 .container {
     max-width: 600px;
     margin: 100px auto;
     text-align: center;
 }
+.menubar {
+    background-color: black;
+    display: inline-block;
+    width: 100%;
+    margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+	float: left;
+}
+
+#cartIcon {
+	height: 30px;
+	width: 30px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.header {
+    background-color: #407ded;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+}
+.header h1 {
+    margin: 0;
+}
+.nav {
+    background-color: #020201;
+    padding: 10px 20px;
+    text-align: right;
+}
+.nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+}
+.signin-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #444;
+    min-width: 160px;
+    z-index: 1;
+}
+.dropdown-content a {
+    color: #fff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {
+    background-color: #333;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
 h1 {
     color: #3d3ad3;
     margin-bottom: 30px;
@@ -92,7 +164,7 @@ font-size:16px;
 .button3 {
    width: 135px;
    height: 65px;
-   background: red;
+   background: rgb(89, 167, 246);
    padding: 10px;
    text-align: center;
    border-radius: 5px;

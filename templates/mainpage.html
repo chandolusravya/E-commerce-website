@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Website</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .left-menu {
+            display: flex;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .right-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .signin-btn {
+            margin-left: auto; /* Moves the button to the right */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>E-Commerce Website</h1>
+    </div>
+    <div class="nav">
+        <div class="left-menu">
+            <!-- Add "Categories" dropdown -->
+            <div class="dropdown">
+                <button class="category-btn">Categories</button>
+                <div class="dropdown-content">
+                    <a href="/category/1">Electronics</a>
+                    <a href="/category/2">Clothing</a>
+                    <a href="/category/3">Books</a>
+                </div>
+            </div>
+            <!-- Add "All Products" dropdown -->
+            <div class="dropdown">
+                <!-- in case to add any buttons-->
+            </div>
+        </div>
+        <div class="right-menu">
+            <!-- Check if user is logged in -->
+            {% if user_is_logged_in %}
+            <div class="dropdown">
+                <button class="signin-btn">Hello {{ firstName }}</button>
+                <div class="dropdown-content">
+                    <a href="/profile">Your Profile</a>
+                    <a href="/orders">Your Orders</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+            {% else %}
+                <a href="/login" class="signin-btn">Sign In</a>
+            {% endif %}
+            <div id="kart">
+                <a class="link" href="/cart">
+                    <img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+                    CART {{ no_of_items }}
+                </a>
+            </div>
+        </div>
+        
+    </div>
+    <div class="container">
+        <h2>Items</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in all_products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>
+                        <a href="/productDescription?productId={{ product.id }}">
+                            <img src="{{ url_for('static', filename=product.image_url) }}" alt="{{ product.filename }}" class="product-image">
+                        </a>
+                    </td>
+                    <td>${{ product.price }}</td>
+                    <td>
+                        <a href='/productDescription' class="button3">Add to Cart</a>
+                        <a href='/productDescription/{{product.id}}' class="button3">Details</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>
