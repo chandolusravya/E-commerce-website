@@ -31,6 +31,15 @@ Note: To open mysql:
       mysql -u root -p
 ##
 
+For the load balancing to work:
+##
+   pip3 install honcho
+##
+
+##
+   honcho start
+##
+
 
 
 
