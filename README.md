@@ -33,11 +33,11 @@ Note: To open mysql:
 
 For the load balancing to work:
 ##
-   pip3 install honcho
+      pip3 install honcho
 ##
 
 ##
-   honcho start
+      honcho start
 ##
 
 
