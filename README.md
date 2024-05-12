@@ -10,6 +10,8 @@ This project aims to create a scalable backend system with secure authentication
 - **Redis Caching:** Utilizes Redis as a caching mechanism to improve performance by storing frequently accessed data in memory.
 
 - **Load Balancing with Nginx:** Distributes incoming traffic across multiple servers to optimize resource utilization and enhance reliability.
+  
+- **Integration with StripeStripe:** is integrated into the system for processing payments securely. It provides a reliable and easy-to-use platform for handling transactions.
 
 ## Additional Points
 
