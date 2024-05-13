@@ -6,81 +6,98 @@
     <title>E-Commerce Website</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f2f2f2;
+        /* Import Lucida font from Google Fonts */
+       
+        /* Apply Lucida font to title */
+        .header h1 {
+            font-family: 'Lucida Sans Typewriter';
+            font-size: 40px;
+        }
+        
+        .container {
+            width: 80%; /* Adjust width as needed */
+            margin: 0 auto; /* Center the container */
+            padding: 20px; /* Add padding around the container */
+            border: 1px solid #ccc; /* Add border for visual clarity */
+        }
+        /* Define table style */
+        table {
+            width: 100%; /* Make table fill its container */
+            border-collapse: collapse; /* Collapse table borders */
+        }
+        th, td {
+            border: 1px solid #ccc; /* Add border for cells */
+            padding: 8px; /* Add padding inside cells */
+            text-align: left; /* Align text to left within cells */
+        }
+        .product-image {
+            max-width: 200px; /* Set maximum width for product image */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .buttons {
+            text-align: right; /* Align buttons to the right */
+        }
+        
+        /* Customize button styles */
+        .button3 {
+            width: 115px;
+            height: 25px;
+            background-color: #BF8085; /* Green background */
+            border: none; /* Remove border */
+            color: white; /* White text color */
+            padding: 10px 20px; /* Add padding */
+            text-align: center; /* Center text */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Make inline block */
+            font-size: 16px; /* Set font size */
+            margin: 4px 2px; /* Add margin */
+            cursor: pointer; /* Add cursor pointer */
+            border-radius: 50px; /* Add border radius */
+        }
+        .button3:hover {
+            background-color: #45a049; /* Darker green background on hover */
         }
 
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .product-name {
+            font-size: 30px; /* Set font size for product name */
+            font-weight: bold;
+            text-align: center;
         }
-
-        .left-menu {
-            display: flex;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
-
-        .right-menu {
-            display: flex;
-            align-items: center;
-        }
-
-        .signin-btn {
-            margin-left: auto; /* Moves the button to the right */
+        .product-price {
+            font-size: 25px; /* Set font size for product price */
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>E-Commerce Website</h1>
+        <style>
+            /* Import Lucida font from Google Fonts */
+           
+            /* Apply Lucida font to title */
+            .header h1 {
+                font-family: 'Brush Script MT', cursive;
+                font-size: 70px;
+            }
+        </style>
     </div>
     <div class="nav">
         <div class="left-menu">
             <!-- Add "Categories" dropdown -->
             <div class="dropdown">
-                <button class="category-btn">Categories</button>
+                <button class="btn categories-btn">Categories</button>
                 <div class="dropdown-content">
                     <a href="/category/1">Electronics</a>
                     <a href="/category/2">Clothing</a>
                     <a href="/category/3">Books</a>
                 </div>
             </div>
-            <!-- Add "All Products" dropdown -->
-            <div class="dropdown">
-                <!-- in case to add any buttons-->
-            </div>
+            <button class="btn categories-btn">
+                <a href="/">
+                    Home
+                </a>
+            </button>
         </div>
         <div class="right-menu">
             <!-- Check if user is logged in -->
@@ -88,7 +105,7 @@
             <div class="dropdown">
                 <button class="signin-btn">Hello {{ firstName }}</button>
                 <div class="dropdown-content">
-                    <a href="/profile">Your Profile</a>
+                    <a href="/updateProfile" method="">Your Profile</a>
                     <a href="/orders">Your Orders</a>
                     <a href="/logout">Logout</a>
                 </div>
@@ -105,36 +122,50 @@
         </div>
         
     </div>
+  <!-- Flash message display -->
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flash-messages">
+      <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  {% endwith %}
     <div class="container">
-        <h2>Items</h2>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Image</th>
-                    <th>Price</th>
-                    <th></th>
-                </tr>
-            </thead>
+        <h2>Products</h2>
+        <!-- Table inside the container -->
+        <table>
             <tbody>
                 {% for product in all_products %}
                 <tr>
-                    <td>{{ product.name }}</td>
+                    <!-- Left side: Image, Product Name, Details -->
+                    
                     <td>
-                        <a href="/productDescription?productId={{ product.id }}">
+                        <div class="product-name">{{ product.name }}</div>
+                        <a href='/productDescription/{{product.id}}'>
                             <img src="{{ url_for('static', filename=product.image_url) }}" alt="{{ product.filename }}" class="product-image">
                         </a>
+                        
+                        
                     </td>
-                    <td>${{ product.price }}</td>
+                    <!-- Right side: Price, Add to Cart, Details buttons -->
                     <td>
-                        <a href='/productDescription' class="button3">Add to Cart</a>
-                        <a href='/productDescription/{{product.id}}' class="button3">Details</a>
+                        <div class="product-price">${{ product.price }}</div>
+                        <div class="buttons">
+                            <a href='/addToCart?productId={{ product.id }}' class="button3">Add to Cart</a>                        
+                            <a href='/productDescription/{{product.id}}' class="button3">Details</a>
+                        </div>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+
+
     
 </body>
 </html>

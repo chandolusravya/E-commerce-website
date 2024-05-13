@@ -1,3 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Website</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <style>
+        /* Import Lucida font from Google Fonts */
+       
+        /* Apply Lucida font to title */
+        .header h1 {
+            font-family: 'Lucida Sans Typewriter';
+            font-size: 40px;
+        }
+        
+        .container {
+            width: 80%; /* Adjust width as needed */
+            margin: 0 auto; /* Center the container */
+            padding: 20px; /* Add padding around the container */
+            border: 1px solid #ccc; /* Add border for visual clarity */
+        }
+        /* Define table style */
+        table {
+            width: 100%; /* Make table fill its container */
+            border-collapse: collapse; /* Collapse table borders */
+        }
+        th, td {
+            border: 1px solid #ccc; /* Add border for cells */
+            padding: 8px; /* Add padding inside cells */
+            text-align: left; /* Align text to left within cells */
+        }
+        .product-image {
+            max-width: 200px; /* Set maximum width for product image */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .buttons {
+            text-align: right; /* Align buttons to the right */
+        }
+        
+        /* Customize button styles */
+        .button3 {
+            width: 115px;
+            height: 25px;
+            background-color: #BF8085; /* Green background */
+            border: none; /* Remove border */
+            color: white; /* White text color */
+            padding: 10px 20px; /* Add padding */
+            text-align: center; /* Center text */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Make inline block */
+            font-size: 16px; /* Set font size */
+            margin: 4px 2px; /* Add margin */
+            cursor: pointer; /* Add cursor pointer */
+            border-radius: 50px; /* Add border radius */
+        }
+        .button3:hover {
+            background-color: #45a049; /* Darker green background on hover */
+        }
+
+        .product-name {
+            font-size: 30px; /* Set font size for product name */
+            font-weight: bold;
+            text-align: center;
+        }
+        .product-price {
+            font-size: 25px; /* Set font size for product price */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>E-Commerce Website</h1>
+        <style>
+            /* Import Lucida font from Google Fonts */
+           
+            /* Apply Lucida font to title */
+            .header h1 {
+                font-family: 'Brush Script MT', cursive;
+                font-size: 70px;
+            }
+        </style>
+    </div>
+    <div class="nav">
+        <div class="left-menu">
+            <!-- Add "Categories" dropdown -->
+            <div class="dropdown">
+                <button class="btn categories-btn">Categories</button>
+                <div class="dropdown-content">
+                    <a href="/category/1">Electronics</a>
+                    <a href="/category/2">Clothing</a>
+                    <a href="/category/3">Books</a>
+                </div>
+            </div>
+            <button class="btn categories-btn">
+                <a href="/">
+                    Home
+                </a>
+            </button>
+        </div>
+        <div class="right-menu">
+            <!-- Check if user is logged in -->
+            {% if user_is_logged_in %}
+            <div class="dropdown">
+                <button class="signin-btn">Hello {{ firstName }}</button>
+                <div class="dropdown-content">
+                    <a href="/updateProfile" method="">Your Profile</a>
+                    <a href="/orders">Your Orders</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+            {% else %}
+                <a href="/login" class="signin-btn">Sign In</a>
+            {% endif %}
+            <div id="kart">
+                <a class="link" href="/cart">
+                    <img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+                    CART {{ no_of_items }}
+                </a>
+            </div>
+        </div>
+    </div>
+      <!-- Flash message display -->
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+  <div class="flash-messages">
+    <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+{% endwith %}
 <div class="container">
     <h2>Product Description</h2>
     <div class="row">
@@ -8,7 +143,8 @@
             <h3>{{ product.name }}</h3>
             <p>{{ product.description }}</p>
             <p><strong>Price:</strong> ${{ product.price }}</p>
-            <!-- Add more details here if needed -->
+            <a href='/addToCart?productId={{ product.id }}' class="button3">Add to Cart</a>                        
         </div>
     </div>
 </div>
+

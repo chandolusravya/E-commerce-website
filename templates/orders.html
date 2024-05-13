@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Orders</h2>
+        {% if user_is_logged_in %}
+            {% if orders %}
+                <ul>
+                    {% for order in orders %}
+                        <li>{{ order }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No orders placed yet.</p>
+            {% endif %}
+        {% else %}
+            <p>Please <a href="{{ url_for('login') }}">log in</a> to view your orders.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

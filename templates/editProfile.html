@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Website</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <div class="header">
+        <h1>E-Commerce Website</h1>
+    </div>
+    <div class="nav">
+        <div class="left-menu">
+            <!-- Add "Categories" dropdown -->
+            <div class="dropdown">
+                <button class="btn categories-btn">Categories</button>
+                <div class="dropdown-content">
+                    <a href="/category/1">Electronics</a>
+                    <a href="/category/2">Clothing</a>
+                    <a href="/category/3">Books</a>
+                </div>
+            </div>
+            <!-- Add "All Products" dropdown -->
+            <button class="btn categories-btn">
+                <a href="/">Home</a>
+            </button>
+        </div>
+        <div class="right-menu">
+            <!-- Check if user is logged in -->
+            {% if user_is_logged_in %}
+            <div class="dropdown">
+                <button class="signin-btn">Hello {{ firstName }}</button>
+                <div class="dropdown-content">
+                    <a href="/updateProfile">Your Profile</a>
+                    <a href="/orders">Your Orders</a>
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+            {% else %}
+                <a href="/login" class="signin-btn">Sign In</a>
+            {% endif %}
+            <div id="kart">
+                <a class="link" href="/cart">
+                    <img src="{{ url_for('static', filename='images/shoppingCart.png') }}" id="cartIcon" />
+                    CART {{ no_of_items }}
+                </a>
+            </div>
+        </div>
+    </div>
+    <h2></h2>
+    <div class="display">
+        <h2>Edit profile</h2>
+        <form action="/updateProfile" method="POST">
+            <p>Email: <input type="email" name="email" value="{{ profileData.email }}" readonly="readonly"></p>
+            <p>Name: <input type="text" name="firstName" value="{{ profileData.first_name }}"></p>
+            <p>Address: <input type="text" name="address1" value="{{ profileData.address }}"></p>
+            <p>Zip Code: <input type="text" name="zipcode" value="{{ profileData.pincode }}"></p>
+            <p>City: <input type="text" name="city" value="{{ profileData.city }}"></p>
+            <p>State: <input type="text" name="state" value="{{ profileData.state }}"></p>
+            <p>Country: <input type="text" name="country" value="{{ profileData.country }}"></p>
+            <p>Phone Number: <input type="text" name="phone" value="{{ profileData.home }}"></p>
+            <input type="submit" value="Save">
+        </form>
+    </div>
+</body>
+</html>

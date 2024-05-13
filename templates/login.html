@@ -2,34 +2,66 @@
   <meta charset="UTF-8">
   <title>Login</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+  <style>
+    /* Center the container */
+    body, html {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    form {
+        text-align: center;
+    }
+    p {
+      text-align: center;
+    }
+    h3 {
+        font-size: 30px; /* Adjust font size as needed */
+    }
+    </style>
 </head>
-   <form method="POST">
-      <h3 align="center">Login</h3>
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          name="email"
-          placeholder="Enter email"
-        />
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="password"
-          name="password"
-          placeholder="Enter password"
-        />
-      </div>
-      <br />
-      <button type="submit" class="btn btn-primary">Login</button>
-    </form>
-    <p>Login via Gmail<a href="{{ url_for('oauthlogin') }}">Sign Up</a></p>
-
-    <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign Up</a></p>
-
+  <!-- Flash message display -->
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flash-messages">
+      <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  {% endwith %}
+<div class="form-container">
+  <form method="POST">
+    <h3>Login</h3>
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        placeholder="Enter email"
+      />
+    </div>
+    
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        placeholder="Enter password"
+      />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+  <p>Login via Gmail<a href="{{ url_for('oauthlogin') }}">Sign In</a></p>
+  <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign Up</a></p>
+</div>
     

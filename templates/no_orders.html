@@ -122,45 +122,13 @@
         </div>
         
     </div>
-      <!-- Flash message display -->
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-  <div class="flash-messages">
-    <ul>
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-  </div>
-{% endif %}
-{% endwith %}
-
-    <div class="cartItems">
-        <h2>Shopping Cart</h2>
-        <div class="tableItems">
-            {% for row in products %}
-            <div class="item">
-                <hr class="seperator">
-                <div class="itemImage">
-                    <img src="{{ url_for('static', filename=row[3]) }}" id="image" alt="Product Image">
-                </div>
-                <div class="itemName">
-                    <span class="itemNameTag">{{ row[1] }}</span><br>
-                    In stock<br>
-                    <a href="/removefromCart?productId={{ row[0] }}">Remove</a>
-                </div>
-                <div class="itemPrice">
-                    ${{ row[2] }}
-                </div>
-            </div>
-            {% endfor %}
-            <hr class="seperator">
-            <div class="total">
-                <span class="subtotal">Subtotal</span> : ${{ totalPrice }}
-            </div>
-        </div>
-    </div>
-    <a href="/checkout" class="checkout-btn">Proceed to checkout</a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Orders</title>
+</head>
+<body>
+    <h1>No Orders</h1>
+    <p>You have no previous orders.</p>
 </body>
 </html>
-
