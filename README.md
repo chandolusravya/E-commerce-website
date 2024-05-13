@@ -100,6 +100,22 @@ To set up the development environment, follow these steps:
 
     Update the `client_secret.json` file with the OAuth client ID and secret.
 
+## Database Setup
+
+1. **Create Mysql account:**
+   
+   - After creating the mysql account, login into mysql using mysql -u root -p.
+   - In the code "app.py" and in "database.py", replace the password with mysql password.
+
+3. **Creating database and tables:**
+
+   - In mysql cli:
+     run CREATE database ecommerce;
+
+   - In terminal:
+     run python database.py
+   
+
 ## Usage
 
 To run the application, use the following command:
