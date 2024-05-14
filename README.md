@@ -1,4 +1,5 @@
-# E-commerce Website
+# SCALABLE BACKEND SYSTEM WITH SECURE​ AUTHENTICATION:
+## E-commerce Website
 
 This project aims to create a scalable backend system with secure authentication for an E-commerce website. It incorporates OAuth for authentication, Redis caching for improved performance, and load balancing for scalability.
 ### Contributors:
