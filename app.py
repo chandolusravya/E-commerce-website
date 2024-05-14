@@ -14,6 +14,7 @@ import pathlib
 import bcrypt
 import stripe
 from flask_caching import Cache
+import redis
 
 # Define the database model
 app = Flask(__name__)
@@ -52,6 +53,8 @@ app.config['CACHE_REDIS_PORT'] = 6379
 # Initialize the Flask-Caching extension
 cache = Cache(app)
 
+# Initialize Redis client 
+redis_client = redis.Redis(host='localhost', port=6379, db=0)
 
 class User(db.Model,UserMixin):
     __tablename__ = 'User'
