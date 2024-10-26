@@ -2,10 +2,7 @@
 ## E-commerce Website
 
 This project aims to create a scalable backend system with secure authentication for an E-commerce website. It incorporates OAuth for authentication, Redis caching for improved performance, and load balancing for scalability.
-### Contributors:
-- **Anusha Anandhan-** Frontend, Secure user authentication and encryption.
-- **Sravya Chandolu-** Redis Caching and Load Balancing
-- **Mrunal Patil-** Frontend
+
 
 ## Features
 
